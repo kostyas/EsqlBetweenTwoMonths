@@ -1,0 +1,28 @@
+
+
+CREATE COMPUTE MODULE betwenmonth_Compute1
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot = InputRoot;
+--		DECLARE firstYear INTEGER CAST( InputRoot.XMLNSC.body.firstYear AS INTEGER);
+--		DECLARE lastYear INTEGER CAST( InputRoot.XMLNSC.body.lastYear AS INTEGER);
+--		DECLARE firstMonth INTEGER CAST( InputRoot.XMLNSC.body.firstMonth AS INTEGER);
+--		DECLARE lastMonth INTEGER CAST( InputRoot.XMLNSC.body.lastMonth AS INTEGER);
+--		DECLARE yearCount INTEGER;
+--		DECLARE monthCount INTEGER;
+--		SET yearCount = firstYear - lastYear;
+--		SET monthCount = firstMonth - 1;
+--		
+--		if (yearCount)<> 0 then
+--			DECLARE prevyearMonth INTEGER;
+--			DECLARE monthOutCount INTEGER;
+--			SET prevyearMonth = monthCount - lastMonth;
+--			SET OutputRoot.XMLNSC.body.monthInThisYear = yearCount*12 + prevyearMonth;
+--		else 
+--			SET OutputRoot.XMLNSC.body.monthInThisYear = firstMonth - lastMonth;
+--		end if;
+		
+		RETURN TRUE;
+	END;
+END MODULE;

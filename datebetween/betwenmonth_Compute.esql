@@ -1,0 +1,39 @@
+
+DECLARE firstDate EXTERNAL DATE '';
+DECLARE secondDate EXTERNAL DATE '';
+
+CREATE COMPUTE MODULE betwenmonth_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE mounthResult INTEGER;
+		CALL calcBetwDate (firstDate, secondDate, mounthResult);
+		SET OutputRoot.XMLNSC.body.mounthResult = mounthResult;
+	RETURN TRUE;
+	END;
+	
+	---------------------------------------------------------------------------------------------------------
+-------------------------------------CALCULATE FUNCTION MONTH BETWEEN TWHO DATE----------------------------------
+	 -------------------------------------------------------------------------------------------------------
+	 
+CREATE PROCEDURE calcBetwDate (IN firstDate DATE, IN secondDate DATE, OUT mounthResult INTEGER)
+	BEGIN
+		DECLARE firstYear INTEGER EXTRACT(YEAR FROM firstDate);
+		DECLARE lastYear INTEGER EXTRACT(YEAR FROM secondDate);
+		DECLARE firstMonth INTEGER EXTRACT(MONTH FROM firstDate);
+		DECLARE lastMonth INTEGER EXTRACT(MONTH FROM secondDate);
+				
+		DECLARE yearCount INTEGER;
+		DECLARE monthCount INTEGER;
+			
+		SET yearCount = firstYear - lastYear;
+		SET monthCount = firstMonth;
+			if (yearCount)<> 0 then
+				DECLARE prevyearMonth INTEGER;
+				DECLARE monthOutCount INTEGER;
+				SET prevyearMonth = monthCount - lastMonth;
+				SET mounthResult = yearCount*12 + prevyearMonth;
+			else 
+				SET mounthResult = firstMonth - lastMonth;
+		end if;	
+	END;
+END MODULE;
